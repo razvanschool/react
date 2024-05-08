@@ -7,12 +7,13 @@ import {
   ButtonDropdown,
   LinkContainerDesktop,
 } from "./Navbar.style";
+import { List, X } from "react-bootstrap-icons";
 
 export const routes = [
-  { title: "Home", href: "Home" },
-  { title: "Movies", href: "Movies" },
-  { title: "Add", href: "Add" },
-  { title: "Edit", href: "Edit" },
+  { title: "Home", href: "home" },
+  { title: "Movies", href: "movies" },
+  { title: "Add", href: "add" },
+  { title: "Edit", href: "edit" },
 ];
 
 function NavBar() {
@@ -41,7 +42,7 @@ function NavBar() {
         ))}
       </LinkContainerDesktop>
       <ButtonDropdown onClick={() => handleDisplayDropdown()}>
-        Click me!
+        {!displayDropdown ? <List size={40} /> : <X size={40} />}
       </ButtonDropdown>
       {displayDropdown && <Dropdown functieDeApelatinDropdown={handleClick} />}
     </NavbarContainer>

@@ -1,10 +1,15 @@
-import { Link } from "./Navbar.style";
+import { LinkNavStyle } from "./Navbar.style";
+// import { Link } from "react-router-dom";
 
-function LinkNav({ title, subtitle, href, functieDeApelat }) {
+function LinkNav({ title, href, functieDeApelat }) {
   return (
-    <Link onClick={() => functieDeApelat(title)} href={href}>
-      {title ? title : "Link"} {subtitle}
-    </Link>
+    <>
+      <LinkNavStyle onClick={() => functieDeApelat(title)} to={href}>
+        {title ? title : "Link"}
+        {/* <Link to={"/home"}> vezi ca mergi </Link> */}
+        {/* exemplu de link simplu de la reat router dom */}
+      </LinkNavStyle>
+    </>
   );
 }
 

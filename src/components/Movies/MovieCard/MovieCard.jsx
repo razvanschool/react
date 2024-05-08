@@ -16,20 +16,20 @@ function MovieCard({ title, year, rating, img, description, category }) {
       </CardImgContainer>
       <CardInfoContainer>
         <Title>
-          <UperText>Title:</UperText> {title}
+          <UperText></UperText> {title}
         </Title>
         <Text>
-          <UperText>Year:</UperText> {year}
+          <UperText>Year: </UperText> {year}
         </Text>
         <Text>
-          <UperText>Rating:</UperText> {rating}
+          <UperText>Rating: </UperText> {rating}
         </Text>
         <Text>
-          <UperText>Description:</UperText>
+          <UperText>Description: </UperText>
           {description}
         </Text>
         <Text>
-          <UperText>Category:</UperText>
+          <UperText>Category: </UperText>
           {category}
         </Text>
       </CardInfoContainer>
