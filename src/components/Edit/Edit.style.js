@@ -1,4 +1,4 @@
-import { DARK_GRAY, WHITE_NEUTRAL } from "./../../constants/color";
+import { DARK_GRAY, WHITE_NEUTRAL } from "../../constants/color";
 import styled from "styled-components";
 
 export const AddContainer = styled.div`

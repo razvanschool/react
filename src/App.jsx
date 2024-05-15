@@ -7,17 +7,19 @@ import Home from "./components/Home/Home";
 import Movies from "./components/Movies/Movies";
 import NavBar from "./components/NavBar/Navbar";
 import Movie from "./components/Movie/Movie";
+import MoviesEditDelete from "./components/MoviesEditDelete/MoviesEditDelete";
+import Edit from "./components/Edit/Edit";
 
 function App() {
   return (
     <>
       <NavBar />
-
       <Routes>
         <Route path="/test" element={<div>TEST</div>} />
         {/* exemplu ca asteapta html */}
         <Route path="/home" element={<Home />} />
-        <Route path="/edit" element={<div>edit</div>} />
+        <Route path="/edit-delete" element={<MoviesEditDelete />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/add" element={<Add />} />
         <Route path="/movie/:id" element={<Movie />} />
         <Route path="/movies" element={<Movies />} />

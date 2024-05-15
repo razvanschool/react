@@ -1,6 +1,6 @@
-import { AddLabel, AddInput, ErrorP } from "./Add.style";
+import { AddLabel, AddInput, ErrorP } from "./Edit.style";
 
-const AddForm = ({ name, handleChange, type, value, error }) => {
+const EditForm = ({ name, handleChange, type, value, error }) => {
   return (
     <>
       <AddLabel>{name}</AddLabel>
@@ -15,4 +15,4 @@ const AddForm = ({ name, handleChange, type, value, error }) => {
   );
 };
 
-export default AddForm;
+export default EditForm;

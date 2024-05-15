@@ -13,7 +13,7 @@ export const routes = [
   { title: "Home", href: "home" },
   { title: "Movies", href: "movies" },
   { title: "Add", href: "add" },
-  { title: "Edit", href: "edit" },
+  { title: "Edit/Delete", href: "edit-delete" },
 ];
 
 function NavBar() {
