@@ -1,5 +1,6 @@
 // File: StyledDiv.js
 import styled from "styled-components";
+import { CardImg } from "../Movies/MovieCard/MovieCard.style";
 
 export const MovieContainer = styled.div`
   display: flex;
@@ -10,4 +11,10 @@ export const MovieContainer = styled.div`
   min-height: 100vh;
   gap: 16px;
   flex-wrap: wrap;
+  flex-direction: column;
+`;
+
+export const MovieImgSingle = styled(CardImg)`
+  max-height: 100%;
+  width: auto;
 `;

@@ -8,9 +8,9 @@ import {
   Text,
 } from "./MovieCard.style";
 
-function MovieCard({ title, year, rating, img, description, category }) {
+function MovieCard({ title, year, rating, img, description, category, id }) {
   return (
-    <Card>
+    <Card to={`/movie/${id}`}>
       <CardImgContainer>
         <CardImg src={img} />
       </CardImgContainer>

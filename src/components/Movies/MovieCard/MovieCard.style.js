@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import { DARK_GREEN, WHITE_NEUTRAL } from "../../../constants/color";
 import styled from "styled-components";
 
-export const Card = styled.div`
+export const Card = styled(Link)`
   background: ${DARK_GREEN};
   color: ${WHITE_NEUTRAL};
   width: 340px;
@@ -15,6 +16,8 @@ export const Card = styled.div`
 
 export const CardImgContainer = styled.div`
   height: 300px;
+  display: flex;
+  justify-content: center;
 `;
 
 export const CardImg = styled.img`
