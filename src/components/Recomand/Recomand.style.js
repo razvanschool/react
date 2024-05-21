@@ -1,8 +1,7 @@
 // File: StyledDiv.js
 import styled from "styled-components";
-import { CardImg } from "../Movies/MovieCard/MovieCard.style";
 
-export const MovieContainer = styled.div`
+export const RecomandContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 48px 24px;
@@ -13,9 +12,4 @@ export const MovieContainer = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   color: white;
-`;
-
-export const MovieImgSingle = styled(CardImg)`
-  max-height: 100%;
-  width: auto;
 `;

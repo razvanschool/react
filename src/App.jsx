@@ -9,7 +9,7 @@ import NavBar from "./components/NavBar/Navbar";
 import Movie from "./components/Movie/Movie";
 import MoviesEditDelete from "./components/MoviesEditDelete/MoviesEditDelete";
 import Edit from "./components/Edit/Edit";
-
+import Recomand from "./components/Recomand/Recomand";
 function App() {
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
         <Route path="/add" element={<Add />} />
         <Route path="/movie/:id" element={<Movie />} />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/recomand" element={<Recomand />} />
         <Route path="/" element={<Home />} />
       </Routes>
 

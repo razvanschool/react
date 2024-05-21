@@ -14,6 +14,7 @@ export const routes = [
   { title: "Movies", href: "movies" },
   { title: "Add", href: "add" },
   { title: "Edit/Delete", href: "edit-delete" },
+  { title: "Recomand", href: "recomand" },
 ];
 
 function NavBar() {

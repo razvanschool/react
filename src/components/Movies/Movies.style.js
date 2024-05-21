@@ -10,4 +10,5 @@ export const MovieContainer = styled.div`
   min-height: 100vh;
   gap: 16px;
   flex-wrap: wrap;
+  color: white;
 `;

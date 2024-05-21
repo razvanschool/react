@@ -4,48 +4,48 @@ import AddForm from "./AddForm";
 
 const inputs = [
   {
-    name: "Title",
+    name: "title",
     type: "text",
   },
   {
-    name: "Image",
+    name: "image",
     type: "text",
   },
   {
-    name: "Year",
+    name: "year",
     type: "number",
   },
   {
-    name: "Rating",
+    name: "rating",
     type: "number",
   },
   {
-    name: "Description",
+    name: "description",
     type: "text",
   },
   {
-    name: "Category",
+    name: "category",
     type: "text",
   },
 ];
 
 const Add = () => {
   const [inputObject, setInputObject] = useState({
-    Title: "",
-    Image: "",
-    Year: 0,
-    Rating: 0,
-    Description: "",
-    Category: "",
+    title: "",
+    image: "",
+    year: 0,
+    rating: 0,
+    description: "",
+    category: "",
   });
 
   const [error, setError] = useState({
-    Title: undefined,
-    Image: undefined,
-    Year: undefined,
-    Rating: undefined,
-    Description: undefined,
-    Category: undefined,
+    title: undefined,
+    image: undefined,
+    year: undefined,
+    rating: undefined,
+    description: undefined,
+    category: undefined,
   });
 
   const handleChange = (e, name) => {
@@ -73,6 +73,17 @@ const Add = () => {
       default:
         break;
     }
+  };
+
+  const handlesubmit = () => {
+    console.log(inputObject);
+    fetch(`http://localhost:3001/movies`, {
+      method: "POST",
+      body: JSON.stringify(inputObject),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   // const [title, setTitle] = useState("");
@@ -103,7 +114,7 @@ const Add = () => {
         />
       ))}
       {/* {errorTitle && <p>{errorTitle}</p>} */}
-      <AddButton> Submit</AddButton>
+      <AddButton onClick={() => handlesubmit()}> Submit</AddButton>
     </AddContainer>
   );
 };

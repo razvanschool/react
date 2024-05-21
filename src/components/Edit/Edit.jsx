@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AddContainer, AddButton } from "./Edit.style";
 import EditForm from "./EditForm";
 import { useParams } from "react-router-dom";
+import useFetchMovies from "../../hooks/useFetchMovie";
 
 const inputs = [
   {
@@ -32,6 +33,11 @@ const inputs = [
 
 const Edit = () => {
   const { id } = useParams(); //am extras doar id din {id: 1}
+  const {
+    movies: movie,
+    error: errorGetData,
+    loading,
+  } = useFetchMovies("/" + id);
 
   const [inputObject, setInputObject] = useState({});
 
@@ -75,31 +81,39 @@ const Edit = () => {
     console.log(inputObject);
     fetch(`http://localhost:3001/movies/${id}`, {
       method: "PUT",
-      body: inputObject,
+      body: JSON.stringify(inputObject),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   };
 
   useEffect(() => {
-    // fetch e o functie asyncrona
-    fetch(`http://localhost:3001/movies/${id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setInputObject(data);
-        // setMovies imi face update la state si imi forteaza componenta sa se re-randeze
-      })
-      .catch(() => {
-        setError(true);
-        // la fel si setError
-        // in concluzie de fiecare data cand se schimba state-ul (stare componentei)
-        // tot codul e rexecutat
-      });
-  }, [id]);
+    if (movie) setInputObject(movie);
+  }, [movie]);
+
+  // useEffect(() => {
+  //   // fetch e o functie asyncrona
+  //   fetch(`http://localhost:3001/movies/${id}`)
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setInputObject(data);
+  //       // setMovies imi face update la state si imi forteaza componenta sa se re-randeze
+  //     })
+  //     .catch(() => {
+  //       setError(true);
+  //       // la fel si setError
+  //       // in concluzie de fiecare data cand se schimba state-ul (stare componentei)
+  //       // tot codul e rexecutat
+  //     });
+  // }, [id]);
 
   return (
     <AddContainer>
-      {inputs ? (
+      {!errorGetData &&
+        inputs &&
         inputs?.map((el, index) => (
           <EditForm
             key={index}
@@ -109,12 +123,13 @@ const Edit = () => {
             handleChange={handleChange}
             error={error[el.name]}
           />
-        ))
-      ) : (
-        <h1>Loading...</h1>
-      )}
+        ))}
+      {loading && <div>Loading...</div>}
       {/* {errorTitle && <p>{errorTitle}</p>} */}
-      <AddButton onClick={() => handlesubmit()}> Submit</AddButton>
+      {!errorGetData && (
+        <AddButton onClick={() => handlesubmit()}> Submit</AddButton>
+      )}
+      {errorGetData && <p>{errorGetData}</p>}
     </AddContainer>
   );
 };

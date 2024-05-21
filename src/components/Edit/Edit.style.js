@@ -11,12 +11,15 @@ export const AddContainer = styled.div`
   gap: 16px;
   flex-wrap: wrap;
   flex-direction: column;
+  color: white;
 `;
 
 export const AddLabel = styled.p`
   font-size: large;
   max-width: 400px;
   margin: 12px auto 0;
+  text-transform: uppercase;
+  color: orange;
 `;
 
 export const AddInput = styled.input`
