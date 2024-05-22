@@ -18,15 +18,16 @@ function Movie() {
     useLocalStorage("movies");
 
   const addNewId = () => {
-    const local = !isLocalDataEmpty ? JSON.parse(localData) : [];
-    const newLocalData = [...local, id];
-    handleLocalData("movies", JSON.stringify(newLocalData));
+    if (movie) {
+      const local = !isLocalDataEmpty ? JSON.parse(localData) : [];
+      const newLocalData = [...local, movie.category];
+      handleLocalData("movies", JSON.stringify(newLocalData));
+    }
   };
 
   useEffect(() => {
-    console.log(isLocalDataEmpty);
-    if (localData || isLocalDataEmpty) addNewId();
-  }, [localData, isLocalDataEmpty]);
+    if (localData || isLocalDataEmpty || movie) addNewId();
+  }, [localData, isLocalDataEmpty, movie]);
 
   // const [movie, setMovie] = useState();
   // const [error, setError] = useState(false);

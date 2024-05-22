@@ -4,33 +4,6 @@ import EditForm from "./EditForm";
 import { useParams } from "react-router-dom";
 import useFetchMovies from "../../hooks/useFetchMovie";
 
-const inputs = [
-  {
-    name: "title",
-    type: "text",
-  },
-  {
-    name: "img",
-    type: "text",
-  },
-  {
-    name: "year",
-    type: "number",
-  },
-  {
-    name: "rating",
-    type: "number",
-  },
-  {
-    name: "description",
-    type: "text",
-  },
-  {
-    name: "category",
-    type: "text",
-  },
-];
-
 const Edit = () => {
   const { id } = useParams(); //am extras doar id din {id: 1}
   const {
@@ -39,7 +12,7 @@ const Edit = () => {
     loading,
   } = useFetchMovies("/" + id);
 
-  const [inputObject, setInputObject] = useState({});
+  const [inputObject, setInputObject] = useState(null);
 
   const [error, setError] = useState({
     title: undefined,
@@ -112,16 +85,16 @@ const Edit = () => {
 
   return (
     <AddContainer>
-      {!errorGetData &&
-        inputs &&
-        inputs?.map((el, index) => (
+      {inputObject &&
+        //Object.keys imi faci un array de cheile obiectului ex: {"cheie": 1 } => ["cheie"]
+        Object.keys(inputObject).map((el, index) => (
           <EditForm
             key={index}
-            name={el.name}
-            type={el.type}
-            value={inputObject[el.name]}
+            name={el}
+            type={el === "year" || el === "rating" ? "number" : "text"}
+            value={inputObject[el]}
             handleChange={handleChange}
-            error={error[el.name]}
+            error={error[el]}
           />
         ))}
       {loading && <div>Loading...</div>}

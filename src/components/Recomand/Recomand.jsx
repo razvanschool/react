@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useFetchMovies from "../../hooks/useFetchMovie";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { AddButton as ResetButton } from "../Edit/Edit.style";
@@ -11,13 +12,41 @@ import {
 } from "../Movies/MovieCard/MovieCard.style";
 import { RecomandContainer } from "./Recomand.style";
 
-function Recomand() {
-  const getRecomandMovie = (localData) => {
-    for (let index = 0; index < localData.length; index++) {}
-  }; // TODO Recomandare Film
+const getTopOccurrences = (movie) => {
+  const counts = movie.reduce((acc, item) => {
+    acc[item] = (acc[item] || 0) + 1;
+    return acc;
+  }, {});
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map((item) => item[0]);
+};
 
-  const { movies: movie, error, loading } = useFetchMovies("/" + 1);
+const getTopMovieByCategory = (movies, localData) => {
+  const topCategories = getTopOccurrences(localData);
+
+  for (const category of topCategories) {
+    const movie = movies.find((movie) => movie.category === category);
+    if (movie) {
+      return movie;
+    }
+  }
+
+  return null;
+};
+
+function Recomand() {
+  const [movie, setMovie] = useState({});
+
+  const { movies, loading, error } = useFetchMovies();
   const { resetLocalData, localData } = useLocalStorage("movies");
+
+  useEffect(() => {
+    if (localData !== null && movies) {
+      const topMovie = getTopMovieByCategory(movies, JSON.parse(localData));
+      setMovie(topMovie);
+    }
+  }, [localData, movies]);
 
   return (
     <RecomandContainer>

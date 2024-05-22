@@ -45,7 +45,12 @@ function NavBar() {
       <ButtonDropdown onClick={() => handleDisplayDropdown()}>
         {!displayDropdown ? <List size={40} /> : <X size={40} />}
       </ButtonDropdown>
-      {displayDropdown && <Dropdown functieDeApelatinDropdown={handleClick} />}
+      {displayDropdown && (
+        <Dropdown
+          onFocus={() => handleDisplayDropdown()}
+          functieDeApelatinDropdown={handleClick}
+        />
+      )}
     </NavbarContainer>
   );
 }

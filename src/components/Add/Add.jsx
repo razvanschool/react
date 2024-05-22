@@ -2,33 +2,6 @@ import { useState } from "react";
 import { AddContainer, AddButton } from "./Add.style";
 import AddForm from "./AddForm";
 
-const inputs = [
-  {
-    name: "title",
-    type: "text",
-  },
-  {
-    name: "image",
-    type: "text",
-  },
-  {
-    name: "year",
-    type: "number",
-  },
-  {
-    name: "rating",
-    type: "number",
-  },
-  {
-    name: "description",
-    type: "text",
-  },
-  {
-    name: "category",
-    type: "text",
-  },
-];
-
 const Add = () => {
   const [inputObject, setInputObject] = useState({
     title: "",
@@ -103,16 +76,19 @@ const Add = () => {
 
   return (
     <AddContainer>
-      {inputs.map((el, index) => (
-        <AddForm
-          key={index}
-          name={el.name}
-          type={el.type}
-          value={inputObject[el.name]}
-          handleChange={handleChange}
-          error={error[el.name]}
-        />
-      ))}
+      {Object.keys(inputObject).map(
+        //Object.keys imi faci un array de cheile obiectului ex: {"cheie": 1 } => ["cheie"]
+        (el, index) => (
+          <AddForm
+            key={index}
+            name={el}
+            type={el === "year" || el === "rating" ? "number" : "text"}
+            value={inputObject[el]}
+            handleChange={handleChange}
+            error={error[el]}
+          />
+        )
+      )}
       {/* {errorTitle && <p>{errorTitle}</p>} */}
       <AddButton onClick={() => handlesubmit()}> Submit</AddButton>
     </AddContainer>

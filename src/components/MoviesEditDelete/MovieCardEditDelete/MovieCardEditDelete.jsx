@@ -6,8 +6,8 @@ import {
   CardInfoContainer,
   Title,
   UperText,
-  ButtonEdit,
 } from "./MovieCardEditDelete.style";
+import { Link } from "react-router-dom";
 
 function MovieCard({ title, img, id, handleDelete, show, setShow, setShowId }) {
   const handleCloseShow = () => {
@@ -43,7 +43,7 @@ function MovieCard({ title, img, id, handleDelete, show, setShow, setShowId }) {
 
           <Button onClick={handleCloseShow}>Delete</Button>
 
-          <ButtonEdit to={`/edit/${id}`}>Edit</ButtonEdit>
+          <Link to={`/edit/${id}`}>Edit</Link>
         </CardInfoContainer>
       </Card>
     </>
