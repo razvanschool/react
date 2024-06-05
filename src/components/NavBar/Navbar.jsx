@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Dropdown from "./Dropdown";
 import LinkNav from "./LinkNav";
 import {
@@ -8,6 +8,7 @@ import {
   LinkContainerDesktop,
 } from "./Navbar.style";
 import { List, X } from "react-bootstrap-icons";
+import { ContorContext } from "../../store/context";
 
 export const routes = [
   { title: "Home", href: "home" },
@@ -27,6 +28,10 @@ function NavBar() {
   const handleDisplayDropdown = () => {
     setDisplayDropdown(!displayDropdown);
   };
+
+  const { stateGlobalContor } = useContext(ContorContext);
+
+  const { contorValue } = stateGlobalContor; // const  contorValue  = stateGlobalContor.contorValue;
 
   return (
     <NavbarContainer>
@@ -51,6 +56,7 @@ function NavBar() {
           functieDeApelatinDropdown={handleClick}
         />
       )}
+      <>CONTOR: {contorValue}</>
     </NavbarContainer>
   );
 }

@@ -1,10 +1,36 @@
-import { useState } from "react";
+import React, { useContext } from "react";
 import { HomeContainer, HomeImageBackground, HomeText } from "./Home.style";
-import Afis from "./afis";
-import Change from "./change";
+import {
+  contorMinus,
+  contorPlus,
+  returnToDefault,
+} from "./../../store/actions";
+import { ContorContext } from "../../store/context";
 
 function Home() {
   // const [contor, setContor] = useState(0);
+  // const contorContextValue = useContext(ContorContext);
+  const { stateGlobalContor, dispatchContor } = useContext(ContorContext);
+
+  const handlePlus = () => {
+    const actionPlus = contorPlus(1);
+    dispatchContor(actionPlus); // ispatchContor(contorPlus());
+    console.log("plus");
+  };
+  const handleMinus = () => {
+    const actionMinus = contorMinus(1);
+    dispatchContor(actionMinus);
+    console.log("minus");
+  };
+
+  const handleReset = () => {
+    const actionDefault = returnToDefault();
+    dispatchContor(actionDefault);
+    console.log("DEfault");
+  };
+
+  const { contorValue } = stateGlobalContor; // const  contorValue  = stateGlobalContor.contorValue;
+
   return (
     <HomeContainer>
       {/* <Afis numar={contor} />
@@ -15,6 +41,13 @@ function Home() {
         }
       />
       <HomeText>Bun venit pe pagina mea de Movies</HomeText>
+      <div style={{ background: "#5d0303", color: "#fff", padding: "50px" }}>
+        <div onClick={handleMinus}>-</div>
+        {"  "} Produse adaugate in cos: {contorValue}
+        {"  "}
+        <div onClick={handlePlus}>+</div>
+        <div onClick={handleReset}>Revino la default</div>
+      </div>
     </HomeContainer>
   );
 }
