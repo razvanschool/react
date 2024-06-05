@@ -12,9 +12,10 @@ import Edit from "./components/Edit/Edit";
 import Recomand from "./components/Recomand/Recomand";
 // Importam elementele necesare
 import { useReducer } from "react";
-import { contorReducer } from "./store/reducer";
+import { contorReducer, initialStateContor } from "./store/reducer";
 import { ContorContext } from "./store/context";
-import { initialStateContor } from "./store/reducer";
+import { MoviesContext } from "./store/movies/context";
+import { initialStateMovies, moviesReducer } from "./store/movies/reducer";
 
 function App() {
   // Initializam reducerul
@@ -29,24 +30,37 @@ function App() {
     dispatchContor,
   };
 
+  const [stateGlobalMovies, dispatchMovies] = useReducer(
+    moviesReducer,
+    initialStateMovies
+  );
+
+  // Cream valoarea pe care o vom pasa lui ContorContext.Provider.
+  const moviesContextValue = {
+    stateGlobalMovies,
+    dispatchMovies,
+  };
+
   return (
     // Facem dissponibile catre intreaga aplicatie state-urile globale, precum si functiile ce modifica state-urile globale.
     <ContorContext.Provider value={contorContextValue}>
-      <NavBar />
-      <Routes>
-        <Route path="/test" element={<div>TEST</div>} />
-        {/* exemplu ca asteapta html */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/edit-delete" element={<MoviesEditDelete />} />
-        <Route path="/edit/:id" element={<Edit />} />
-        <Route path="/add" element={<Add />} />
-        <Route path="/movie/:id" element={<Movie />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/recomand" element={<Recomand />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <MoviesContext.Provider value={moviesContextValue}>
+        <NavBar />
+        <Routes>
+          <Route path="/test" element={<div>TEST</div>} />
+          {/* exemplu ca asteapta html */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/edit-delete" element={<MoviesEditDelete />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/add" element={<Add />} />
+          <Route path="/movie/:id" element={<Movie />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/recomand" element={<Recomand />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
+      </MoviesContext.Provider>
     </ContorContext.Provider>
   );
 }
